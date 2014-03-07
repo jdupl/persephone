@@ -1,7 +1,6 @@
-// imports
 var path = require('path');
 
-// controller methods
+// controller routes
 var routes = {};
 
 // GET /
