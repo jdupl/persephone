@@ -5,6 +5,7 @@
 var http = require('../lib/http.js')
   , common = require('../lib/common.js')
   , util = require('util')
+  , uuid = require('uuid')
   , events = require('events');
 
 // Parse a date.
@@ -126,6 +127,7 @@ Search.prototype._nextPage = function () {
       parts = $(font).text().split(',');
 
       result = {
+        uuid: uuid.v4(),
         title: $(detLink).attr('title'),
         url: exports.url + $(detLink).attr('href'),
         magnet: $(cells[1]).find('a').eq(1).attr('href'),

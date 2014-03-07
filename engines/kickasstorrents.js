@@ -5,6 +5,7 @@
 var http = require('../lib/http.js')
   , common = require('../lib/common.js')
   , util = require('util')
+  , uuid = require('uuid')
   , events = require('events');
 
 /**
@@ -62,6 +63,7 @@ Search.prototype._nextPage = function () {
 
     torrents.list.forEach(function (torrent) {
       result = {
+        uuid: uuid.v4(),
         title: torrent.title,
         url: torrent.link,
         torrent: torrent.torrentLink,
