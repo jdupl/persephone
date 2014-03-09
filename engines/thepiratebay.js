@@ -127,7 +127,7 @@ Search.prototype._nextPage = function () {
       parts = $(font).text().split(',');
 
       result = {
-        uuid: uuid.v4(),
+        id: uuid.v4(),
         title: $(detLink).attr('title'),
         url: exports.url + $(detLink).attr('href'),
         magnet: $(cells[1]).find('a').eq(1).attr('href'),

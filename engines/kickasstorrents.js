@@ -63,7 +63,7 @@ Search.prototype._nextPage = function () {
 
     torrents.list.forEach(function (torrent) {
       result = {
-        uuid: uuid.v4(),
+        id: uuid.v4(),
         title: torrent.title,
         url: torrent.link,
         torrent: torrent.torrentLink,
