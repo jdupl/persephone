@@ -1,0 +1,30 @@
+<ul class="nav nav-tabs">
+  {% for search in searches %}
+    <li class="{% if search.id === activeSearch  %}active{% endif %}"
+      onclick="persephoneOnTabClicked('{{ search.id }}')">
+      <a href="#search-{{ search.id }}" data-toggle="tab">
+        {{ search.what }}
+        <button class="close" style="float: none;" onclick="persephoneOnCloseTab('{{ search.id }}')">&times;</button>
+      </a>
+    </li>
+  {% endfor %}
+</ul>
+<div class="tab-content">
+ {% for search in searches %}
+    <div class="tab-pane{% if search.id === activeSearch %} active{% endif %}" id="search-{{ search.id }}">
+      {% if search.results.length == 0 %}
+        0 results so far.
+      {% else %}
+        <table class="table">
+          <tr>
+            <th>LoL</th>
+          </tr>
+          {% for result in search.results %}
+            <tr>
+            </tr>
+          {% endfor %}
+        </table>
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
