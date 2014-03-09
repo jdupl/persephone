@@ -101,6 +101,6 @@ exports.search = function (what) {
 };
 
 // Export module data.
-exports.id = 'thepiratebay';
-exports.name = 'The Pirate Bay';
+exports.id = 'kickasstorrents';
+exports.name = 'Kickass Torrents';
 exports.url = 'https://kickass.to';
