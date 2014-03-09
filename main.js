@@ -6,7 +6,8 @@ var express = require('express')
 var app = express();
 
 // setup app
-app.use('/static', express.static(path.join(__dirname, 'static')));
+app.use(express.logger({ format: ':method :url: :status' }));
+app.use('/static', express.static(path.join(__dirname, 'webui/static')));
 app.use(express.json());
 app.use(express.urlencoded());
 
