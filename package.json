@@ -8,5 +8,5 @@
     "request": "^2.34.0",
     "cheerio": "^0.13.1"
   },
-  "main": "main.js"
+  "main": "app.js"
 }
