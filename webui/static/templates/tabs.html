@@ -17,10 +17,20 @@
       {% else %}
         <table class="table">
           <tr>
-            <th>LoL</th>
+            <th>Title</th>
+            <td>Date</td>
+            <td>Size</td>
+            <td>Seeds</td>
+            <td>Leechs</td>
           </tr>
           {% for result in search.results %}
-            <tr>
+            <tr data-id="{{ result.id }}">
+              <td><a href="{% if result.magnet %}{{ result.magnet }}{% else %}{{ result.torrent }}{% endif %}"><span class="glyphicon glyphicon-magnet"></span></a></td>
+              <td><a href="{{ result.url }}" target="_blank">{{ result.title }}</a></td>
+              <td>{{ result.date }}</td>
+              <td>{{ result.size }}</td>
+              <td>{{ result.seeds }}</td>
+              <td>{{ result.leechs }}</td>
             </tr>
           {% endfor %}
         </table>

@@ -26,11 +26,28 @@ routes.startSearch = function (req, res) {
   }
 };
 
+routes.getSearch = function (req, res) {
+  var id = req.query.id;
+  if (id) {
+    var search = service.getSearch(id);
+    if (search) {
+      res.json({
+        done: search.done,
+        results: search.results
+      });
+    } else {
+      apiError(res, "Search not found.");
+    }
+  } else {
+    apiError(res, "Id undefined.");
+  }
+};
+
 routes.clearSearch = function (req, res) {
   var id = req.query.id;
   
   if (id) {
-    // service.clearSearch(id);
+    service.clearSearch(id);
   }
 }
 

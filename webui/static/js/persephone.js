@@ -19,16 +19,18 @@
     $('#contentArea').html(content);
   }
   
-//  function startSearchDaemon() {
-//    function callback() {
-//      viewModel.searches.forEach(function (search) {
-//        if (search.id && !search.done) {
-//          
-//        }
-//      });
-//    }
-//    setInterval(callback, 200);
-//  }
+  setInterval(function () {
+    viewModel.searches.forEach(function (search) {
+      if (search.id !== undefined && !search.done) {
+        $.getJSON('/api/getSearch', {id: search.id}, function (data) {
+          search.done = data.done;
+          search.results = data.results;
+          console.log(search.results.length);
+          renderTabs();
+        });
+      }
+    });
+  }, 500);
   
   $(function () {
     // load the tabsTemplate
@@ -51,6 +53,7 @@
           });
           renderTabs();
         });
+        $('#searchText').val('');
       }
       
       return false;
