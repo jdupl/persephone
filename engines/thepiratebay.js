@@ -31,10 +31,19 @@ function extractDate(str) {
     month = parseInt(matches[1]);
     day = parseInt(matches[2]);
   } else {
+    var now = new Date();
     matches = str.match(reSpecialDate);
-    year = new Date().getFullYear();
-    month = parseInt(matches[1]);
-    day = parseInt(matches[2]);
+    year = now.getFullYear();
+    if (matches !== null) {
+      month = parseInt(matches[1]);
+      day = parseInt(matches[2]);
+    } else {
+      month = now.getMonth() + 1;
+      day = now.getDate();
+      if (str.indexOf('Y-day')) {
+        day--;
+      }
+    }
   }
   return common.formatDateParts(year, month, day);
 }
