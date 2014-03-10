@@ -68,6 +68,7 @@ function Search(what) {
   this._resultCount = 0;
   this._expectedAmount = null;
   this.results = [];
+  this.done = false;
 }
 
 // extend EventEmitter
