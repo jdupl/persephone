@@ -85,6 +85,7 @@ Search.prototype.start = function () {
  * Stop searching for torrents.
  */
 Search.prototype.stop = function () {
+  this.done = true;
   this._stop = true;
 };
 
@@ -153,6 +154,7 @@ Search.prototype._nextPage = function () {
 
     // do not stop
     if (done) {
+      this.done = true;
       this.emit('end');
     } else {
       this._nextPage();
