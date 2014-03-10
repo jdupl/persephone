@@ -40,7 +40,7 @@ function extractDate(str) {
     } else {
       month = now.getMonth() + 1;
       day = now.getDate();
-      if (str.indexOf('Y-day')) {
+      if (str.indexOf('Y-day') >= 0) {
         day--;
       }
     }
