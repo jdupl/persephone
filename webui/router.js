@@ -1,5 +1,5 @@
-var home = require('./controllers/home'),
-    api = require('./controllers/api');
+var home = require('./controllers/home.js')
+  , api = require('./controllers/api.js');
 
 // function to setup routes
 module.exports = function (app) {

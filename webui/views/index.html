@@ -50,7 +50,7 @@
               <tbody data-bind="foreach: results">
                 <tr data-bind="attr: { 'data-id': id }">
                   <td>
-                    <a data-bind="attr: { href: magnet() ? magnet() : torrent() }">
+                    <a target="_blank" data-bind="attr: { href: magnet() ? magnet() : torrent() }">
                       <span class="glyphicon glyphicon-magnet"></span>
                     </a>
                   </td>

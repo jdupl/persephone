@@ -8,11 +8,8 @@ function apiError(res, msg) {
   });
 }
 
-// controller routes
-var routes = {};
-
-// start search
-routes.startSearch = function (req, res) {
+// GET /api/startSearch
+exports.startSearch = function (req, res) {
   var what = req.query.what;
   
   if (what) {
@@ -26,7 +23,8 @@ routes.startSearch = function (req, res) {
   }
 };
 
-routes.getSearch = function (req, res) {
+// GET /api/getSearch
+exports.getSearch = function (req, res) {
   var id = req.query.id;
   if (id) {
     var search = service.getSearch(id);
@@ -43,12 +41,11 @@ routes.getSearch = function (req, res) {
   }
 };
 
-routes.clearSearch = function (req, res) {
+// GET /api/clearSearch
+exports.clearSearch = function (req, res) {
   var id = req.query.id;
   
   if (id) {
     service.clearSearch(id);
   }
-}
-
-module.exports = routes;
+};
