@@ -72,7 +72,8 @@ Search.prototype._nextPage = function () {
         date: common.formatDateString(torrent.pubDate),
         size: common.formatBytes(torrent.size),
         seeds: torrent.seeds,
-        leechs: torrent.leechs
+        leechs: torrent.leechs,
+        source: exports.id
       };
       results.push(result);
     }, this);

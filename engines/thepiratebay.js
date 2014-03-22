@@ -63,7 +63,12 @@ function extractSize(str) {
  * @returns Expected amount of results.
  */
 function extractExpectedAmount(str) {
-  return parseInt(str.match(reExpectedAmount)[1]);
+  var matches = str.match(reExpectedAmount);
+  if (matches !== null) {
+    return parseInt(matches[1]);
+  } else {
+    return 0;
+  }
 }
 
 /**
@@ -145,7 +150,8 @@ Search.prototype._nextPage = function () {
         date: extractDate(parts[0]),
         size: extractSize(parts[1]),
         seeds: parseInt($(cells[2]).text()),
-        leechs: parseInt($(cells[3]).text())
+        leechs: parseInt($(cells[3]).text()),
+        source: exports.id
       };
 
       results.push(result);

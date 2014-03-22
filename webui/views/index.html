@@ -12,9 +12,9 @@
       <div class="col-xs-12">
         <h3>Perséphone <small>WebUI for torrent search!</small></h3>
         <br>
-	      <form id="searchForm">
+	      <form data-bind="submit: startSearch">
 	        <div class="input-group">
-	          <input id="searchText" type="text" class="form-control" placeholder="Search torrent">
+	          <input data-bind="value: searchText" type="text" class="form-control" placeholder="Search torrent">
 	          <span class="input-group-btn">
 	            <button class="btn btn-primary" type="submit">Search</button>
 	          </span>
@@ -24,13 +24,53 @@
       </div>
     </div>
     <div class="row">
-      <div id="contentArea" class="col-xs-12">
+      <div class="col-xs-12">
+        <ul class="nav nav-tabs" data-bind="foreach: searches">
+          <li data-bind="css: { active: id() === $parent.activeSearchId() }">
+            <a data-toggle="tab" data-bind="attr: { href: '#search-' + id() }">
+              <span data-bind="text: what"></span>
+              <button class="close" style="float: none;" data-bind="click: $parent.closeTab">&times;</button>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content" data-bind="foreach: searches">
+          <div class="tab-pane" data-bind="css: { active: id() === $parent.activeSearchId() }, attr: { id: 'search-' + id() }">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Title</th>
+                  <th>Date</th>
+                  <th>Size</th>
+                  <th>Seeds</th>
+                  <th>Leechs</th>
+                  <th>Provider</th>
+                </tr>
+              </thead>
+              <tbody data-bind="foreach: results">
+                <tr data-bind="attr: { 'data-id': id }">
+                  <td>
+                    <a data-bind="attr: { href: magnet() ? magnet() : torrent() }">
+                      <span class="glyphicon glyphicon-magnet"></span>
+                    </a>
+                  </td>
+                  <td><a target="_blank" data-bind="text: title, attr: { href: url }"></a></td>
+                  <td data-bind="text: date"></td>
+                  <td data-bind="text: size"></td>
+                  <td data-bind="text: seeds"></td>
+                  <td data-bind="text: leechs"></td>
+                  <td><img data-bind="attr: { src: provider }" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
   <script src="/static/js/jquery-2.1.0.min.js"></script>
   <script src="/static/js/bootstrap.min.js"></script>
-  <script src="/static/js/swig.min.js"></script>
+  <script src="/static/js/knockout-3.1.0.js"></script>
   <script src="/static/js/persephone.js"></script>
 </body>
 </html>
