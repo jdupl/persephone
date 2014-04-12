@@ -1,5 +1,5 @@
 // this script requires a browser which supports EcmaScript 5.1.
-+function () {
+(function () {
   "use scrict";
   
   var providersIcon = {
@@ -82,4 +82,4 @@
   }, 1000);
   
   ko.applyBindings(viewModel);
-}();
+}());
