@@ -10,9 +10,14 @@ Perséphone is a Web UI that allows you to search torrents on multiple torrent w
 * Reduce memory footprint as much as possible.
 * Add the ability to pause/resume/purge searches.
 * Create init scripts for various operating systems and init systems.
+* Create bridges to BitTorrent clients Web UIs.
+* Implement sessions/logins
+* Add `https` support.
+* Create a better README with screenshots and features description.
+
+*Those TODOs aren't in prority order.*
 
 ## License
 Use this at your own risk. The Perséphone project and its authors are not responsible for the content you download with it.
 
 The code is licensed under the GPL, see the `LICENSE` file.
-
