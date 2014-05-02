@@ -5,7 +5,7 @@ var home = require('./controllers/home.js')
 module.exports = function (app) {
   app.get('/', home.index);
   app.get('/settings', home.settings);
-  app.get('/api/startSearch', api.startSearch);
-  app.get('/api/getSearch', api.getSearch);
-  app.get('/api/clearSearch', api.clearSearch);
+  app.post('/api/startSearch', api.startSearch);
+  app.post('/api/getSearch', api.getSearch);
+  app.post('/api/clearSearch', api.clearSearch);
 };

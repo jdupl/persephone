@@ -3,3 +3,11 @@
   margin-right: 30px;
   width: auto;
 }
+
+.nav.nav-tabs .close {
+  float: none;
+}
+
+#main-body {
+  margin-top: 20px;
+}

@@ -10,7 +10,7 @@ function apiError(res, msg) {
 
 // GET /api/startSearch
 exports.startSearch = function (req, res) {
-  var what = req.query.what;
+  var what = req.body.what;
   
   if (what) {
     var id = service.startSearch(what);
@@ -25,7 +25,7 @@ exports.startSearch = function (req, res) {
 
 // GET /api/getSearch
 exports.getSearch = function (req, res) {
-  var id = req.query.id;
+  var id = req.body.id;
   if (id) {
     var search = service.getSearch(id);
     if (search) {
@@ -43,7 +43,7 @@ exports.getSearch = function (req, res) {
 
 // GET /api/clearSearch
 exports.clearSearch = function (req, res) {
-  var id = req.query.id;
+  var id = req.body.id;
   
   if (id) {
     service.clearSearch(id);

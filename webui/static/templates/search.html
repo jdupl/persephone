@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-xs-6 col-xs-offset-3">
+    <form ng-submit="startSearch()">
+      <div class="input-group">
+        <input class="form-control" type="text" ng-model="searchText">
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="tabs" class="row" ng-class="{hidden: isEmpty()}">
+  <div class="col-xs-10 col-xs-offset-1">
+    <ul class="nav nav-tabs">
+      <li ng-repeat="search in searches" ng-class="{active: isActive(search.id)}">
+        <a href="javascript:void 0;" ng-click="setActiveSearchId(search.id)">
+          <span>{{ search.what }}</span>
+          <button class="close" ng-click="removeSearch(search.id)">&times;</button>
+        </a>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div ng-repeat="search in searches" ng-class="{active: isActive(search.id)}" class="tab-pane">
+        <table class="table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Size</th>
+              <th>Seeds</th>
+              <th>Leechs</th>
+              <th>Provider</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="result in search.results">
+              <td>
+                <a target="_blank" href="{{ result.magnet ? result.magnet : result.torrent }}">
+                  <span class="glyphicon glyphicon-magnet"></span>
+                </a>
+              </td>
+              <td><a target="_blank" href="{{ result.url }}">{{ result.title }}</a></td>
+              <td>{{ result.date }}</td>
+              <td>{{ result.size }}</td>
+              <td>{{ result.seeds }}</td>
+              <td>{{ result.leechs }}</td>
+              <td><img src="{{ getProvider(result.source) }}" /></td>
+            </tr>
+          </tbody>
+         </table>
+      </div>
+    </div>
+  </div>
+</div>

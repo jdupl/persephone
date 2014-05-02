@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="persephone">
 <head>
   <title>Perséphone</title>
   <meta charset="utf8">
@@ -7,70 +7,14 @@
   <link rel="stylesheet" href="/static/css/persephone.css">
 </head>
 <body>
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <h3>Perséphone <small>WebUI for torrent search!</small></h3>
-        <br>
-	      <form data-bind="submit: startSearch">
-	        <div class="input-group">
-	          <input data-bind="value: searchText" type="text" class="form-control" placeholder="Search torrent">
-	          <span class="input-group-btn">
-	            <button class="btn btn-primary" type="submit">Search</button>
-	          </span>
-	        </div>
-	      </form>
-	      <br>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <ul class="nav nav-tabs" data-bind="foreach: searches">
-          <li data-bind="css: { active: id() === $parent.activeSearchId() }">
-            <a data-toggle="tab" data-bind="attr: { href: '#search-' + id() }">
-              <span data-bind="text: what"></span>
-              <button class="close" style="float: none;" data-bind="click: $parent.closeTab">&times;</button>
-            </a>
-          </li>
-        </ul>
-        <div class="tab-content" data-bind="foreach: searches">
-          <div class="tab-pane" data-bind="css: { active: id() === $parent.activeSearchId() }, attr: { id: 'search-' + id() }">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Title</th>
-                  <th>Date</th>
-                  <th>Size</th>
-                  <th>Seeds</th>
-                  <th>Leechs</th>
-                  <th>Provider</th>
-                </tr>
-              </thead>
-              <tbody data-bind="foreach: results">
-                <tr data-bind="attr: { 'data-id': id }">
-                  <td>
-                    <a target="_blank" data-bind="attr: { href: magnet() ? magnet() : torrent() }">
-                      <span class="glyphicon glyphicon-magnet"></span>
-                    </a>
-                  </td>
-                  <td><a target="_blank" data-bind="text: title, attr: { href: url }"></a></td>
-                  <td data-bind="text: date"></td>
-                  <td data-bind="text: size"></td>
-                  <td data-bind="text: seeds"></td>
-                  <td data-bind="text: leechs"></td>
-                  <td><img data-bind="attr: { src: provider }" /></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div id="main-body" class="container" ng-view>
   </div>
   <script src="/static/js/lib/jquery-2.1.0.min.js"></script>
   <script src="/static/js/lib/bootstrap.min.js"></script>
-  <script src="/static/js/lib/knockout-3.1.0.min.js"></script>
+  <script src="/static/js/lib/angular.min.js"></script>
+  <script src="/static/js/lib/angular-route.min.js"></script>
+  <script src="/static/js/persephone.SearchService.js"></script>
+  <script src="/static/js/persephone.SearchController.js"></script>
   <script src="/static/js/persephone.js"></script>
 </body>
 </html>
