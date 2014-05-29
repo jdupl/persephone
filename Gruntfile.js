@@ -13,7 +13,26 @@ module.exports = function (grunt) {
     jshint: {
       files: jsFiles,
       options: {
-        laxcomma: true
+        bitwise: true,
+        curly: true,
+        eqeqeq: true,
+        forin: true,
+        freeze: true,
+        immed: true,
+        indent: 2,
+        latedef: "nofunc",
+        newcap: true,
+        noarg: true,
+        noempty: true,
+        nonbsp: true,
+        nonew: true,
+        undef: true,
+        unused: true,
+        trailing: true,
+
+        laxcomma: true,
+
+        node: true
       }
     },
     watch: {
@@ -29,11 +48,11 @@ module.exports = function (grunt) {
       }
     }
   });
-  
+
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-exec');
-  
+
   grunt.registerTask('default', ['exec:server']);
 
 };
