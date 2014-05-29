@@ -1,11 +1,12 @@
+/* global angular */
 (function () {
 
   var module = angular.module('SearchService', []);
-  
+
   module.service('searchService', ['$http', '$interval', function ($http, $interval) {
-    
+
     var searches = [];
-    
+
     function startUpdating() {
       searches.forEach(function (search) {
         if (search.id && !search.done) {
@@ -16,9 +17,9 @@
         }
       });
     }
-    
+
     $interval(startUpdating, 1000);
-    
+
     this.startSearch = function (what, callbackFn) {
       $http.post('/api/startSearch', { what: what }).success(function (data) {
         var search = {
@@ -27,13 +28,15 @@
           done: false,
           results: []
         };
-        
+
         searches.push(search);
-        
-        if (typeof callbackFn === 'function') callbackFn(search);
+
+        if (typeof callbackFn === 'function') {
+          callbackFn(search);
+        }
       });
     };
-    
+
   }]);
 
 }());

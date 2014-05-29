@@ -46,7 +46,9 @@ Search.prototype.stop = function () {
  */
 Search.prototype._nextPage = function () {
   // if the search should stop, exit the function
-  if (this._stop) return;
+  if (this._stop) {
+    return;
+  }
 
   // we want to sort the results by seeds, to get the most interesting results
   // first

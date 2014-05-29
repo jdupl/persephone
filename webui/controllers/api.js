@@ -1,6 +1,4 @@
-var fs = require('fs')
-  , uuid = require('uuid')
-  , service = require('../../lib/service.js');
+var service = require('../../lib/service.js');
 
 function apiError(res, msg) {
   res.json({
@@ -11,7 +9,7 @@ function apiError(res, msg) {
 // GET /api/startSearch
 exports.startSearch = function (req, res) {
   var what = req.body.what;
-  
+
   if (what) {
     var id = service.startSearch(what);
     res.json({
@@ -44,7 +42,7 @@ exports.getSearch = function (req, res) {
 // GET /api/clearSearch
 exports.clearSearch = function (req, res) {
   var id = req.body.id;
-  
+
   if (id) {
     service.clearSearch(id);
   }

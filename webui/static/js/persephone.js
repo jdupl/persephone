@@ -1,10 +1,11 @@
+/* global angular */
 (function () {
 
   var app = angular.module('persephone', [
     'ngRoute',
     'persephone.SearchController'
   ]);
-  
+
   app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
       .when('/', {
