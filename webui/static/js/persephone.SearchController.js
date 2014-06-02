@@ -6,8 +6,6 @@
   ]);
 
   module.controller('SearchController', ['$scope', 'searchService', function ($scope, searchService) {
-    window.scope = $scope;
-
     var providersIcon = {
       'kickasstorrents': '/static/icons/kat.png',
       'thepiratebay': '/static/icons/tbp.png'
