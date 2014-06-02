@@ -17,7 +17,7 @@
       <li ng-repeat="search in searches" ng-class="{active: isActive(search.id)}">
         <a href="javascript:void 0;" ng-click="setActiveSearchId(search.id)">
           <span>{{ search.what }}</span>
-          <button class="close" ng-click="removeSearch(search.id)">&times;</button>
+          <button class="close" ng-click="removeSearch(search)">&times;</button>
         </a>
       </li>
     </ul>
@@ -36,7 +36,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="result in search.results">
+            <tr ng-repeat="result in search.results | orderBy:'seeds':true">
               <td>
                 <a target="_blank" href="{{ result.magnet ? result.magnet : result.torrent }}">
                   <span class="glyphicon glyphicon-magnet"></span>
@@ -47,7 +47,7 @@
               <td>{{ result.size }}</td>
               <td>{{ result.seeds }}</td>
               <td>{{ result.leechs }}</td>
-              <td><img src="{{ getProvider(result.source) }}" /></td>
+              <td><img ng-attr-src="{{ getProvider(result.source) }}" /></td>
             </tr>
           </tbody>
          </table>

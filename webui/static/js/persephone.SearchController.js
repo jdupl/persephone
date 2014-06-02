@@ -1,4 +1,4 @@
-/* global angular */
+/* global angular,window */
 (function () {
 
   var module = angular.module('persephone.SearchController', [
@@ -6,6 +6,7 @@
   ]);
 
   module.controller('SearchController', ['$scope', 'searchService', function ($scope, searchService) {
+    window.scope = $scope;
 
     var providersIcon = {
       'kickasstorrents': '/static/icons/kat.png',
@@ -13,10 +14,23 @@
     };
 
     $scope.startSearch = function () {
-      searchService.startSearch($scope.searchText, function (search) {
+      var what = $scope.searchText;
+      searchService.startSearch(what, function (id) {
+        var search = {id: id, what: what, results: [], done: false};
         $scope.searches.push(search);
         $scope.searchText = "";
         $scope.setActiveSearchId(search.id);
+        return {
+          results: function (results) {
+            console.log(search, results);
+            Array.prototype.push.apply(search.results, results);
+            $scope.$apply();
+          },
+          end: function () {
+            search.done = true;
+            $scope.$apply();
+          }
+        };
       });
     };
 
@@ -36,14 +50,12 @@
       return providersIcon.hasOwnProperty(source) ? providersIcon[source] : '';
     };
 
-    $scope.removeSearch = function (id) {
-      $scope.searches = $scope.searches.filter(function (search) {
-        return search.id !== id;
-      });
+    $scope.removeSearch = function (search) {
+      searchService.clearSearch(search.id);
+      $scope.searches.splice($scope.searches.indexOf(search), 1);
     };
 
     $scope.searches = [];
-
   }]);
 
 }());

@@ -1,49 +1,42 @@
 var service = require('../../lib/service.js');
 
-function apiError(res, msg) {
-  res.json({
-    error: msg
-  });
-}
+exports.onConnect = function (socket) {
 
-// GET /api/startSearch
-exports.startSearch = function (req, res) {
-  var what = req.body.what;
+  var searches = [];
 
-  if (what) {
-    var id = service.startSearch(what);
-    res.json({
-      id: id,
-      what: what
+  socket.on('start', function (what, callback) {
+    var search = service.search(what);
+    callback(search.id);
+
+    search.on('results', function (results) {
+      socket.emit('results', {id: search.id ,results: results});
     });
-  } else {
-    apiError(res, 'What parameter is required.');
-  }
-};
 
-// GET /api/getSearch
-exports.getSearch = function (req, res) {
-  var id = req.body.id;
-  if (id) {
-    var search = service.getSearch(id);
-    if (search) {
-      res.json({
-        done: search.done,
-        results: search.results
-      });
-    } else {
-      apiError(res, "Search not found.");
+    search.on('end', function () {
+      socket.emit('end', search.id);
+    });
+
+    search.start();
+    searches.push(search);
+  });
+
+  socket.on('stop', function (id) {
+    var index = -1
+      , len = searches.length;
+    while (++index < len) {
+      if (searches[index].id === id) {
+        searches[index].stop();
+      }
     }
-  } else {
-    apiError(res, "Id undefined.");
-  }
-};
+    // delete search, gc should collect
+    searches.splice(index, 1);
+  });
 
-// GET /api/clearSearch
-exports.clearSearch = function (req, res) {
-  var id = req.body.id;
+  socket.on('disconnect', function () {
+    searches.forEach(function (search) {
+      search.stop();
+    });
+    searches = [];
+  });
 
-  if (id) {
-    service.clearSearch(id);
-  }
 };

@@ -6,6 +6,6 @@ exports.index = function (req, res) {
 };
 
 // GET /settings
-exports.settings = function (req, res) {
+//exports.settings = function (req, res) {
 
-};
+//};
