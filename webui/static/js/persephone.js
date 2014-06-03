@@ -6,7 +6,8 @@
     'persephone.SearchController'
   ]);
 
-  app.config(['$routeProvider', function ($routeProvider) {
+  app.config(['$compileProvider', '$routeProvider', function ($compileProvider, $routeProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|magnet):/);
     $routeProvider
       .when('/', {
         controller: 'SearchController',
