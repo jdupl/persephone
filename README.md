@@ -17,7 +17,7 @@ Perséphone is a Web UI that allows you to search torrents on multiple torrent w
 
 *Those TODOs aren't in priority order.*
 
-## Installation procedureo
+## Installation procedure
 Make sure you have nodejs 0.10 and npm installed.
 * Clone the repo `git clone https://github.com/SBSTP/persephone.git`.
 * Checkout the right tag (version) `git checkout v0.0.0`.
@@ -30,7 +30,7 @@ Also, startup script (for debian based operating systems) is available in the `t
 * Once you're done, copy `persephone.sh` to `/etc/init.d/persephone`.
 * make it executable, `sudo chmod 755 /etc/init.d/persephone`.
 * register it, `sudo update-rc.d persephone defaults`.
-Perséphone should now boot when you start your computer. You can manually control persephone with the `service persephone (start|stop|restart)` command.
+Perséphone should now boot when you start your computer. You can manually control persephone with the `sudo service persephone (start|stop|restart)` command.
 
 ## License
 Use this at your own risk. The Perséphone project and its authors are not responsible for the content you download with it.
