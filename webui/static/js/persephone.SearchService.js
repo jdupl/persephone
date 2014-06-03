@@ -5,7 +5,7 @@
 
   module.service('searchService', [function () {
 
-    var socket = io('http://localhost:3000');
+    var socket = io();
     var listeners = {};
 
     socket.on('connect', function () {
