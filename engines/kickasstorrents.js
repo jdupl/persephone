@@ -58,6 +58,10 @@ Search.prototype._nextPage = function () {
   // fetch the page
   http.get(url, function (err, torrents) {
 
+    if (err) {
+      this._nextPage();
+    }
+
     // extract expected amount if needed
     if (this._expectedAmount === null) {
       this._expectedAmount = torrents.total_results;

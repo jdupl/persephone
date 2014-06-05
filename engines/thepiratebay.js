@@ -121,6 +121,10 @@ Search.prototype._nextPage = function () {
   // fetch the page
   http.get(url, function (err, $) {
 
+    if (err) {
+      this._nextPage();
+    }
+
     // extract expected amount if needed
     if (this._expectedAmount === null) {
       $('h2').find('span').remove();
