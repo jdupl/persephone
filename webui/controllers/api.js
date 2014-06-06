@@ -15,7 +15,6 @@ function onConnect(socket) {
     search.on('end', function () {
       socket.emit('end', search.id);
       process.nextTick(function () {
-        console.log('cleaning up by end ' + search.id);
         delete searches[search.id];
       });
     });
@@ -27,13 +26,11 @@ function onConnect(socket) {
   socket.on('stop', function (id) {
     if (searches.hasOwnProperty(id)) {
       searches[id].stop();
-      console.log('cleaning up by stop ' + id);
       delete searches[id];
     }
   });
 
   socket.on('disconnect', function () {
-    console.log('cleanup');
     Object.keys(searches).forEach(function (id) {
       searches[id].stop();
     });
