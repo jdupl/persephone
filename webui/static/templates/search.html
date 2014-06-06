@@ -14,7 +14,7 @@
 <div id="tabs" class="row" ng-class="{hidden: isEmpty()}">
   <div class="col-xs-10 col-xs-offset-1">
     <ul class="nav nav-tabs">
-      <li ng-repeat="search in searches" ng-class="{active: isActive(search.id)}">
+      <li ng-repeat="(id, search) in searches" ng-class="{active: isActive(search.id)}">
         <a href="javascript:void 0;" ng-click="setActiveSearchId(search.id)">
           <span>{{ search.what }}</span>
           <button class="close" ng-click="removeSearch(search)">&times;</button>
@@ -22,7 +22,7 @@
       </li>
     </ul>
     <div class="tab-content">
-      <div ng-repeat="search in searches" ng-class="{active: isActive(search.id)}" class="tab-pane">
+      <div ng-repeat="(id, search) in searches" ng-class="{active: isActive(search.id)}" class="tab-pane">
         <table class="table">
           <thead>
             <tr>

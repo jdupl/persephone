@@ -7,15 +7,23 @@
   <link rel="stylesheet" href="/static/css/persephone.css">
 </head>
 <body>
-  <div id="main-body" class="container" ng-view>
+  <div id="main-body" class="container">
+    <div ng-controller="StatsController">
+      <div class="row">
+        <div class="col-xs-6 col-xs-offset-3">
+          <h1>Perséphone <small>Torrent search WebUI</small></h1>
+          Current memory usage: {{ memoryText }} MiB
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div ng-view></div>
   </div>
   <script src="/static/js/lib/jquery-2.1.0.min.js"></script>
   <script src="/static/js/lib/bootstrap.min.js"></script>
   <script src="/static/js/lib/socket.io.min.js"></script>
   <script src="/static/js/lib/angular.min.js"></script>
   <script src="/static/js/lib/angular-route.min.js"></script>
-  <script src="/static/js/persephone.SearchService.js"></script>
-  <script src="/static/js/persephone.SearchController.js"></script>
   <script src="/static/js/persephone.js"></script>
 </body>
 </html>

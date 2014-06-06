@@ -1,8 +1,8 @@
 var service = require('../../lib/service.js');
 
-exports.onConnect = function (socket) {
+function onConnect(socket) {
 
-  var searches = [];
+  var searches = {};
 
   socket.on('start', function (what, callback) {
     var search = service.search(what);
@@ -14,29 +14,40 @@ exports.onConnect = function (socket) {
 
     search.on('end', function () {
       socket.emit('end', search.id);
+      process.nextTick(function () {
+        console.log('cleaning up by end ' + search.id);
+        delete searches[search.id];
+      });
     });
 
     search.start();
-    searches.push(search);
+    searches[search.id] = search;
   });
 
   socket.on('stop', function (id) {
-    var index = -1
-      , len = searches.length;
-    while (++index < len) {
-      if (searches[index].id === id) {
-        searches[index].stop();
-      }
+    if (searches.hasOwnProperty(id)) {
+      searches[id].stop();
+      console.log('cleaning up by stop ' + id);
+      delete searches[id];
     }
-    // delete search, gc should collect
-    searches.splice(index, 1);
   });
 
   socket.on('disconnect', function () {
-    searches.forEach(function (search) {
-      search.stop();
+    console.log('cleanup');
+    Object.keys(searches).forEach(function (id) {
+      searches[id].stop();
     });
-    searches = [];
+    searches = {};
   });
 
+};
+
+module.exports = function (io) {
+  io.sockets.on('connection', function (socket) {
+    onConnect(socket);
+  });
+
+  setInterval(function () {
+    io.sockets.emit('stats', process.memoryUsage());
+  }, 1000);
 };
